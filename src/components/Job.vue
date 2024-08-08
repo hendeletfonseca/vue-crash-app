@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, computed } from 'vue';
+import { defineProps, computed, ref } from 'vue';
 
 const props = defineProps({
     job: Object,
@@ -32,10 +32,12 @@ const toggleFullDescription = () => {
             </div>
 
             <div class="mb-5">
-                {{ truncatedDescription }}
-                <button></button>
+                <div v-if="showFullDescription"> {{ job.description }} </div>
+                <div v-else>{{ truncatedDescription }}</div>
+                <button @click="toggleFullDescription" class="text-green-500 hover:text-green-600 mb-5">
+                    {{ showFullDescription ? 'Less' : 'More' }}
+                </button>
             </div>
-
             <h3 class="text-green-500 mb-2">{{ job.salary }}</h3>
 
             <div class="border border-gray-100 mb-5"></div>
